@@ -31,7 +31,13 @@ class APIRequestor(object):
         method_to_use = getattr(requests, http_method.lower())
 
         # TODO: Handle other status codes besides 200
-        return method_to_use(abs_url, headers=headers, params=params)
+        if params.get('data'):
+            return method_to_use(abs_url, headers=headers, data=params.get('data'))
+        else:
+            if params.get('fields'):
+                print(f"fields {','.join(params.get('fields'))}")
+                return method_to_use(abs_url, headers=headers, data=f"fields {','.join(params.get('fields'))};")
+            return method_to_use(abs_url, headers=headers)
 
     def request_headers(self):
         headers = {
