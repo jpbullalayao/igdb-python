@@ -30,7 +30,6 @@ class APIRequestor(object):
         headers = self.request_headers()
         method_to_use = getattr(requests, http_method.lower())
 
-        print('here')
         # TODO: Handle other status codes besides 200
         if params.get('data'):
             return method_to_use(abs_url, headers=headers, data=params.get('data'))
