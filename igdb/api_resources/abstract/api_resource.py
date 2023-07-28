@@ -8,13 +8,13 @@ from igdb.util import convert_to_igdb_object
 class APIResource(IGDBObject):
     @classmethod
     def retrieve(cls, pk, access_token=None, **params):
+        # TODO: Needs to handle "where id"
         instance = cls(pk, access_token, **params)
-        instance.request_and_refresh(http_methods.HTTP_METHOD_POST)
+        instance.request_and_refresh(http_methods.HTTP_METHOD_POST, params)
         return instance
 
-    def request_and_refresh(self, method):
-        # igdb_object = IGDBObject.request(self, method, self.class_url())
-        igdb_object = self.request(method, self.class_url())
+    def request_and_refresh(self, method, params=None):
+        igdb_object = self.request(method, self.class_url(), params)
         self.refresh_from(igdb_object)
         return self
 

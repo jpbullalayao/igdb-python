@@ -1,8 +1,3 @@
-# import igdb
-
-# from igdb.api_requestor import APIRequestor
-# from igdb.util import convert_to_igdb_object
-
 class IGDBObject(dict):
     def __init__(self, pk, access_token=None, **params):
         super(IGDBObject, self).__init__()
@@ -31,14 +26,6 @@ class IGDBObject(dict):
         return instance
 
     def refresh_from(self, values):
+        print('values', values)
         for k, v in iter(values.items()):
             super(IGDBObject, self).__setitem__(k, v)
-
-    # def request(self, method, url, access_token=None, params=None):
-    #     requestor = APIRequestor(
-    #         access_token or igdb.access_token
-    #     )
-
-    #     response = requestor.request(method, url, params)
-    #     igdb_object = convert_to_igdb_object(response, self.__class__)
-    #     return igdb_object
