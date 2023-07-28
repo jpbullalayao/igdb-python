@@ -26,6 +26,5 @@ class IGDBObject(dict):
         return instance
 
     def refresh_from(self, values):
-        print('values', values)
         for k, v in iter(values.items()):
             super(IGDBObject, self).__setitem__(k, v)
