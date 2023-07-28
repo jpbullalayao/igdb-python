@@ -4,7 +4,7 @@ class IGDBObject(dict):
     def __init__(self, pk, access_token=None, **params):
         super(IGDBObject, self).__init__()
 
-        object.__setattr__(self, "access_token", access_token)
+        self.access_token = access_token
 
         if pk:
             pk_field = self.get_pk_field()
