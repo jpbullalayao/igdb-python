@@ -16,6 +16,7 @@ class APIResource(IGDBObject):
             if len(resource) == 0:
                 return None
 
+            # Endpoints return one resource in an array, so we have to extract it
             return resource[0]
 
         return resource

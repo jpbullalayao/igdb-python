@@ -6,7 +6,6 @@ from igdb.util import convert_to_igdb_object
 
 class ListableAPIResource(APIResource):
 
-    # TODO: Call generate_query here, pass result query into .request
     @classmethod
     def list(cls, access_token=None, **params):
         requestor = APIRequestor(access_token)
