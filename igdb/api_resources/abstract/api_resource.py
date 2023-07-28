@@ -10,7 +10,15 @@ class APIResource(IGDBObject):
     def retrieve(cls, pk, access_token=None, **params):
         instance = cls(pk, access_token, **params)
         retrieve_query = instance.generate_retrieve_query(pk)
-        return instance.request_and_refresh(http_methods.HTTP_METHOD_POST, retrieve_query, params)
+        resource = instance.request_and_refresh(http_methods.HTTP_METHOD_POST, retrieve_query, params)
+
+        if isinstance(resource, list):
+            if len(resource) == 0:
+                return None
+
+            return resource[0]
+
+        return resource
 
     def request_and_refresh(self, method, query=None, params=None):
         return self.request(method, self.class_url(), query, params)

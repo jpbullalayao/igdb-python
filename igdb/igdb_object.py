@@ -1,3 +1,5 @@
+import json
+
 class IGDBObject(dict):
     def __init__(self, pk, access_token=None, **params):
         super(IGDBObject, self).__init__()
@@ -28,3 +30,22 @@ class IGDBObject(dict):
     def refresh_from(self, values):
         for k, v in iter(values.items()):
             super(IGDBObject, self).__setitem__(k, v)
+
+    def __repr__(self):
+        ident_parts = [type(self).__name__]
+        ident_parts.append("id=%s" % (self.get("id"),))
+
+        unicode_repr = "<%s> JSON: %s" % (
+            " ".join(ident_parts),
+            str(self),
+        )
+
+        return unicode_repr
+
+    def __str__(self):
+        return json.dumps(
+            self,
+            sort_keys=True,
+            indent=2,
+        )
+    
